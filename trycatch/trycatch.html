@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //189ㅔ
+        try{
+            console.log("try 블럭 시작")
+            /* say; //ReferenceError
+            JSON.parse("{abc aaaa}")  //SyntaxError */
+            throw new SyntaxError("구문이 틀렸어요: 다시작성") ////SyntaxError 의도적으로 에러를 만들어줌
+            console.log("try 블럭 끝")
+        }
+        catch(err){
+            console.log(err.name); //에러라는 객체가 가지고있음 name, message
+            console.log(err.message);
+        }
+        finally { //항상 실행시킬수있는 함수
+            console.log("항상실행");
+        }
+        console.log("계속 동작");
+    </script>
+</body>
+</html>

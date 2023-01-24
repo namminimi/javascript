@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //에러핸들링
+        let json = '{"age": 30}'
+        
+        try{
+            //json타입을 object로 변환
+            let user = JSON.parse(json)
+            console.log(user)
+            if(!user.name) {
+                throw new SyntaxError("이름이 없음")
+            }
+            /* console.log('try블럭 시작')
+            throw new Error("에러를 던집니다.");
+            console.log('try블럭 끝') */
+        }
+        catch(e){
+            console.dir(e)
+            console.log(e.name)
+            console.log(e.message)
+        } finally {
+            console.log("마지막 실행")
+        }
+        console.log("실행")
+    </script>
+</body>
+</html>

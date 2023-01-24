@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">dddd</div>
+    <script>
+        const $app = document.querySelector("#app");
+        //초기 상태
+        let state = {
+            students: ["stu1", "stu2", "stu3", "stu4"]
+        }
+        console.log(state.students);
+        //화면에 그리기 함수
+        const render = ()=>{
+            const {students} = state;
+            $app.innerHTML = 
+            `<ul>
+                ${students.map(stu=>`<li>${stu}</li>`).join("")}
+                //stu
+            </ul>
+            <button id="add">추가</button>
+            `;
+            //students map
+            document.querySelector("#add").addEventListener("click", function(){
+                setState({ students: [...students, `stu${students.length+1}`]})
+            //  setState({ sutdents: [stu1, stu2, stu3, stu4,`stu(length+1)`]})
+            })
+                    
+
+            //상태변경하기
+            const setState = (newState)=> {
+                state = {...state, ...newState}
+                render();
+            }            
+
+
+            ///따로 만든거...
+            let newUl = document.createElement("ul");
+            let newBtn = document.createElement("button");
+            let newLi = document.createElement("li");
+            $app.appendChild(newUl)
+            $app.appendChild(newBtn)
+            const adp = document.querySelector("button:last-child").id = "adp";
+
+            newBtn.innerHTML += "추가"
+            students.forEach(a =>{
+                
+                newUl.appendChild(newLi)
+                newLi.innerHTML += a;
+                console.log(a)
+            })
+            
+            adp.addEventListener("click", function(){
+                for (let i = 4; i <= adp.length; i++) {
+                    newUl.appendchild()
+                }
+            })
+            
+        }
+        render();
+    </script>
+</body>
+</html>

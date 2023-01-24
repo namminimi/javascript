@@ -1,0 +1,154 @@
+﻿XMLHttpRequest(XHR)  -- 서버와 통신을 하도록 하는 객체
+1. 객체는 서버와 상호작용하기 위해 사용
+2. 전체 페이지를 새로고침하지 않아도 URL을 통해 데이터를 전송하거나 받아 올수 있음
+3. XML데이터 통신 x, 모든 종류의 데이터 받아올 수 있음
+4. 객체는 브라우저에서 제공하는 API임  node.js환경x
+
+ajax(Asynchronous javascript and xml)
+동적으로 서버에서 데이터를 주고받는 기술
+
+XML => 마크업 언어
+
+JSON(javascript object notation)
+오브젝트를 보고 만든 데이터포멧
+텍스트를 기반으로 하여 파일이 가벼움
+데이터를 직렬화하여 전송할때 쓰이는 파일
+프로그램 언어와 플랫폼에 상관 없이 사용가능함
+모바일에서도 서버와 전송시 사용됨
+
+JSON.stringify(obj)
+자바스크립트 object를 문자형태로 직렬화
+JSON.pares(json)
+json타입을 자바스크립트 object형태로 변환
+JSON.parse() 메서드는 JSON 문자열의 구문을 분석하고, 그 결과에서 JavaScript 값이나 객체를 생성합니다
+
+JSON형태 
+{
+	"name":"green",
+	"age": 30,
+
+}
+
+HTTP 통신은 기본적으로 요청(request)과 응답(response)으로 나눠짐
+구조는 
+요청라인
+-------
+헤더
+-------
+공백
+-------
+바디
+
+
+객체생성
+const xhr = new XMLHttpRequest();
+---------------------------------------------------------
+요청 전송(요청라인)
+서버 요청 보내기 위해서 HTTP Method, 요청 URL을 정의
+
+open() 함수
+
+XMLHttpRequest의 내장함수 open()
+
+xhr.open('GET', '/posts'); //HTTP Method, URL 정의, 비동기 여부(기본값은 true임)
+              (1)       (2)
+(1).open()함수 첫번째 매개변수 HTTP Method 즉 HTTP요청방식
+
+HTTP Method  |              설명
+1. GET                       리소스 요청 //요청   --------------자주사용됨
+일반적으로 정보를 받아옴 (웹다운로드) 읽는 친구
+get방식 주소창보면 ?있음
+ex) https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=computer//사용자가 입력 받은 정보는 query/
+쿼리 시작지점은 ?부터 시작
+2. POST                     리소스 생성  //전송  --------------자주사용됨
+새로운 자원 생성 (로그인 패스워드 담아서 넘겨줄때) 작성해주는 친구
+post만 body에 담을수 있음
+3. PUT                       리소스 수정
+4. PATCH                   리소스 일부 수정
+5. DELETE                   리소스 삭제  
+
+
+!!! 클라이언트에서 서버로 HTTP 요청하기전에 맞는 헤더값 설정!!!!    
+         
+setRequestHeader()함수 (header) HTTP 관련 여러 설정값이 들어감
+
+setRequestHeader()함수를 통해서 헤더값 설정 가능
+요청할 떄 서버로 전송하는 데이터의 타입을 선언하기 위한 용도로 많이 쓰임
+헤더값 중 content-type에 해당
+content-type은 서버로 전송할 데이터의 MINE 타입 정보를 설정 (크게 3가지로 나눠짐)
+
+MINE 타입      |    content-type 값      |         목적
+application          application/json          json데이터 전송 
+    text                   text/plain            텍스트 데이터 전송 
+multipart          multipart/from-data           파일 전송
+
+xhr.setRequestHeader('content-type', 'application/json');
+
+open() 함수와 setRequestHeader() 함수로 요청에 필요한 정의가 끝나면 send()함수를 통해 요청을 보냄
+서버로 데이터 정송할게 있으면 send()매개 변수로 전달 ->request의 body
+
+HTTP 요청방법이 GET인 경우에는 send()함수 매개변수로 전달해도 실제로 전송 x
+
+onload 이벤트 
+문서의 모든 콘텐츠(images, script, css, etc)가 로드된 후 발생하는 이벤트
+=========================================================================================
+짧게 구조 정리
+
+const xhr = new XMLHttpRequest() 객체를 생성하구
+xhr.open(get/post , url/posts) http 메서드와 url 정의해주고
+xhr.setRequestHeader("content-type", "application/json) 맞는값에 헤터값도 지정해주고
+
+.send() 함수에서 요청을 보내주고
+.onload = () => 이벤트를 사용하여
+if(xhr.status === 201(post 일때) /200 전송 성공한다면
+JSON.parse(xhr.response) send에서 보내온 값을 response에서 응답하고 그걸 JSON.parse() 메서드에서 분석후
+객체 생성
+그길 변수선언 된곳에 넣고
+console.log(JSON.parse(xhr.response))콘솔로 보내면 객체형태가 나옴
+실패시 
+console.error(xhr.status, xhr.statusText) 1번째 있는건 응답상태(403, 404), 2번쨰는 1번쨰꺼 메세지("허가금지", "Not Found")
+==========================================================================================
+
+jsonplaceholder 가상 json서버 사용가능한 주소
+open url에 사용됨
+
+
+================================================================================
+HTTP
+GET은 가상서버에서 전체 객체요소들을 다불러옴  성공번호 200
+POST는 가상서버에서 한개만 들고옴 101      성공번호 201
+PUT 는 url뒤에 수정할 객체 번호를 적어줘야함 (post/1)   성공번호 200
+DELETE도 put과 같이 뒤에 삭제할 번호 적어줘야함(콘솔에 아무렁 번호도 안나옴) 성공번호 200
+================================================================================
+
+HTTP 응답상태 코드  status code(200~ 500)  200번대 ok  400번대 클라이언트 요청 잘못 했을때  500번대 서버에서 에러발생
+200: "OK"
+201:"ok" 요청이 성공적인 표현 post요청에 대한 응답결과
+403: "허가금지"
+404: "Not Found"
+
+XHR readyState
+0 (uninitialized) - (request가 초기화되지 않음)
+1 (loading) - (서버와의 연결이 성사됨)
+2 (loaded) - (서버가 request를 받음)
+3 (interactive) - (request(요청)을 처리하는 중)
+4 (complete) - (request에 대한 처리가 끝났으며 응답할 준비가 완료됨)
+
+=======================================================================================
+Fetch API
+Primise 방식
+fetch("경로")
+.then(response=>response.json()) 요청받은걸 제이슨데이터로 변환
+.then(json=>console.log(json)) 변환받은걸 then으로 받음
+
+
+
+
+
+
+
+
+
+
+
+

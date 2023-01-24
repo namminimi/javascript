@@ -1,0 +1,67 @@
+함수 (기능적인 얘들, 동사)
+프로그램으로 작성할 때 반복적으로 수행하는 일을 함수로 만든다.
+-서브 프로그램
+-프로그램안에서 각각의 기능을 수행함
+-input을 받아서 잘 처리한다음 output을 해줌
+-변수에 담을 수 도 있고 함수를 리턴할 수도 있다.
+기능(딸기와 빵을 빵기계에 넣으면 딸기빵)
+
+
+함수 선언문
+
+function add(함수이름)(투입구/a, b/매개변수이름(변수/지역변수)) {
+	return(output) a(딸기) + b(빵);
+}
+
+리턴값없는 함수
+function printText(text) {
+	console.log(text);
+	return undefined;(자스엔(자바스크립트 엔진에서 자동적으로 생략)
+}
+
+호출방법 printText("월요일");
+
+let result = add(5, 10)
+function add(...arr) {  /// 배열 전체 소환
+	let result = 0;
+	arr.forEach(v -> {
+		result = result + v;
+     })
+}
+
+----------------------------------
+
+
+함수 표현식
+익명 함수
+let printText = function(text) {
+	console.log(text);
+}
+호출방법 printText("월요일");
+
+*화살표 함수 (arrow function)
+(익명함수 간단하게 나타낸것)
+
+let printText = function(text) {
+	console.log(text);
+}
+function이 화살표로 바뀜/화살표 앞에는 매개변수
+let printText = text => {
+console.log(text)
+}
+
+const add = function(a,b) {
+	return a + b;
+}
+
+const add = (a,b) => a + b;
+1) function 키워드 대신 => 키워드 사용
+2) 매개변수가 하나일때는 ()생략가능
+3) 실행코드가 한줄 일 때 return생략 가능, 중괄호 생략가능
+
+*즉시 실행함수
+(function hello()) {
+	console.log("hello");
+} )
+
+----------------------------------------------------------------

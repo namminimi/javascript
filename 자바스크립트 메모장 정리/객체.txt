@@ -1,0 +1,272 @@
+﻿객체 (object)
+기본타입(number, string등등)을 뺀 나머지는 전부 객체타입
+let obj1 = { //파이선 사전과 비슷함
+	name: "green",   ---> 하나의 구성을 property / 키 name 값 "green"
+	age: 30;        // 키 age 값 "30"                            
+}
+호출방법
+obj1.name 또는 obj1["name"]
+obj1.age 또는 obj1["age"]
+obj1.isJob = true;
+
+////호출하면 반환하는 형태///
+Object.keys(객체)
+["name", "age", "color"] 반환
+Object.values(객체)
+["구름", "3", "white"] 반환
+Object.entries(객체)
+[["name", "구름"], ["age", 3], ["color", "white"]]반환
+Object.fromEntries(배열);
+{
+	name: "구름",
+	age: 3,
+	color: "white"
+}
+///////////////////////////////////////////////////
+객체는 키로 벨유값 접근
+배열은 인덱스로 접근
+
+객체 리터럴 선언
+let obj2 = {}
+객체 생성자 선언
+let obj3 = new Object();
+
+배열선언과 비슷 
+let arr2 = [];
+let arr2 = new Array();
+
+find() 배열에서 해당하는 하나의 값을 찾을 시 반환하고 종료
+filter() 조건에 해당하는 값을 배열 요소를 새로운 배열로 반환 !!!!!!별**10001000
+let highscores = scores.filter(score => score > 70)
+map() ㄱ배열에서 배열요소의 값을 변형해서 새로운 배열로 반환 !!!!!별**10001000
+let aa = scores.map(score => score <= 50 ? "B" : "A");
+
+생성자 함수(붕어빵 틀// 함수도 쉽게 만들기위해 틀을 짜줘야함)
+let stu1 = {
+	name: "a",
+	age: 20,
+	score: 60,
+}
+let stu2 = {
+	name: "b",
+	age: 22,
+	score: 66,
+}
+/////this는 현재 함수 안의 매개변수를 가리킴 
+function Students(name, age, score) {
+	this.name = name;
+	this.age = age;
+	this.score = score;
+}
+
+//////호출
+let stu1 = new Student("a", 22, 60);
+
+//////////배열에 사용하는 for문과 객체에 사용되는 for문
+
+배열과 함께 쓰는 for 
+for of 문
+for (let i of arr) {
+	
+}
+
+객체와 함께쓰는 for
+for in문
+let obj1 = {
+	name: "jone",
+	age: 30,
+	isAdmin: true
+}
+
+for (let key of obj1) {
+	console.log(abj1[key])
+}
+
+in 연산자
+"key"in object
+console.log("name" in obj1)
+
+////////////////////////////////////////////////내장객체 Math////////////////////////////////
+
+
+math 객체
+수학적인 상수와 내장 함수를 가진 객체이다.
+
+1) Math.round(number) 반올림 처리
+math.round(5.9); return 6
+
+2) Math.ceil(number) 올림처리
+math.ceil(5.6) return 6
+
+3)Math.floor(number) 내림처리
+math.floor(5.9) return 5
+
+4)Math.trunc() 정수부분 반환
+math.trunc(4.9) return 4
+
+5)Math.sign() 양수인지 음수인지 확인
+음수면 -1을 리턴/0이면 0을 리턴 / 양수면 1을 리턴
+math.sign(-3)
+
+6)Math.pow() 제곱근 값을 반환
+math.pow(2, 3)
+
+7)Math.sqrt() 루트값을 반환
+math.sqrt(64)
+
+8) Math.sbs() 양수값으로 반환
+math.abs(-100) return 100
+
+9)Math.min() / Math.max() min은 최소값을 반환
+max 최대값을 반환
+Math.min(12, 10, 2, 4, 5); return 2
+
+function getRndInterger(min, max) {
+	return Math.floor(Math.random()*(max-min+1)) + min;
+}
+
+10)Math.random() 0보다 크고 1보다 작은 랜덤숫자를 반화냐
+Math.floor(math.random()*5+1) 1~5
+
+Math 내장 객체 *만들진 함수(api)
+Math.random()
+
+0보다 크고 1보다 작은 소수
+0.01231241412~ 0.913410234719284
+
+Math.floor(Math.random() * 5)
+0.01231241412~ 4.913410234719284
+
+Math.floor(Math.random() * 5 )+ 1
+1~5
+
+
+getRndInterger(2, 10)
+Math.random()*(10-2+1)
+Math.random()*9
+0~8 + 2
+2 ~ 10
+
+//////////////////////////////////////////////////////////// Data객체와 날짜 ///////////////////////////////////////////////////////////////////
+
+Data 객체와 날짜
+날짜를 저장할 수 있고 날짜과 관련된 메소드를 제공해주는 내장객체임
+
+객체생성하기
+new Date(milliseconds)/new Date("2022-02-06")
+
+new Date()
+new Date(milliseconds)
+new Date("2022-02-06")
+new Date(year, month, date, hours, minutes, seconds, ms)
+*year, month만 필수 입력, 나머지는 선택입력
+*year는 반드시 네자리 숫자여야함 ex(1998)
+*month 0(1월)~11(12월) 사이의 숫자여야함
+*date는 일을 나타내는데, 값이 없는 경우 1일로 처리
+*hours, minutes, seconds, ms에 값이 없는 경우 0으로 처리
+
+new Date() => 현재 날짜와 시간이 저장된 객체가 반환됨
+
+객체가 반환됨
+new Date(0) => 1970년 1월 1일 0시 0분 0초
+new Date(1000) => 1970년 1월 1일 0시 0분 1초
+
+밀리초 => 초
+밀리초 / 1000
+
+밀리초 => 하루
+하루 24시간
+1시간 60분
+1분 60초
+1초 1000밀리초
+밀리초 / 1000 * 60 * 60 * 24
+
+setDate()
+let someDay = new Date(2022, 10, 12); // 2022-11-12
+someDay.setDate(20); 이 날짜로 바뀜 // 2022-11-20
+
+
+커스텀 속성 dataset
+data-key="data" data-value="50"
+<div id="" class=key: 'date', value: '50'>
+dataset => {key: 'date', value: '50'}
+dataset.key => date
+dataset.value => 50
+
+new Date() => 현재 날짜와 시간을 가진 날짜 객체
+new Date("2022-10-22")해당하는 날짜와 시간을 가진 날짜 객체
+new Date(300000) 1970년 1월 1일 기준으로 300000밀리초 지난 날짜와
+시간을 가진 날짜 객체를 생성
+new Date(0) 1970년 1월 1일의 skfWk rorcp
+new Date(2022, 10, 26) 2022년 10월 26일 날짜 객체 0~11
+
+let today = new Date();
+today.getFullYear();
+today.getMonth()+1;
+today.get
+
+--------------------------------------------------------------------------------------------
+/////////////////////////// 구조분해할당////////////////////////////////////////////////////
+구조분해할당
+객체와 배열
+
+*배열의 요소를 직접 변수에 할당하는 것보다 코드를 줄일 수 있습니다.
+* , 를 사용하면 필요하지 않는 배열 요소는 제외시킬수 있습니다.
+*...스트레드 구문을 사용하여 나머지 요소들을 배열로 받을 수 있다.
+*할당할 값이 없을때 기본값을 설정할 수 있음
+let fruits = ["사과", "딸기", "바나나"]
+let fruit1 = fruits[0];
+let fruit2 = fruits[1];
+let fruit3 = fruits[2];
+let [fruit1, fruit2, fruit3] = fruits;
+
+let str1 = "green"
+let str2 = "blue"
+str1에 blue str2에 green
+[str1, str2] = [str2, str1]
+스프레드 구문 ...(점3개를 사용함)
+나머지 요소를 가져오기
+let newArr = ["a", "b", "c", "d", "e", "f", "g" ];
+let [str1, str2, str3,....str4] = newArr; //나머지 배열 요소를 받아줌
+str4["d", "e", "f", "g",]
+
+let [name = "green", hobby = "study"] = ["blue"]
+
+객체 구조 분해 할당 
+let {name, age} = {name: "a", age: 30}
+let student = {
+	name: "green"
+	age: 20,
+	hasJob: true
+}
+
+let {name, age, hasJob} = student;
+{객체 keyname: 변수이름}
+let {name: n, hasJob: job , age} = student;
+let obj = {title: "green", height:}
+let {title, ...rest} = obj;
+
+함수 매개변수
+let options = {
+	title: "MyTitle"
+	items: ["item1", "item2"]
+}
+function showMenu({title, items}) {
+	console.log(title)
+	console.log(items)
+}
+
+showMenu(options.title
+
+데이터베이스 => 테이블 => 회원의 레코드
+let passwordCh = data.password
+
+/.////
+Set 중복을 허용하지 않는 값을 모아놓은 특별한 컬랙션
+1)new Set() => set을 생성
+2)set.add(value) => 값을 추가
+3)set.delete(value) => 값을 제거
+4)set.has(value) => set내에 값이 존재하면 true리턴, 존재하지 않으면
+false리턴
+5)setclear() => set을 배움
+6)set.size => set요소의 개수

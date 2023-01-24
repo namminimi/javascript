@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="1000" height="800"></canvas>
+    <script>
+        const canvas = document.querySelector("canvas");
+        const ctx = canvas.getContext("2d");
+        //이미지 객체 생성
+
+        let imgElem = new Image();  //생성  //자바엔진에서 만들어줌
+        imgElem.src = "./img/62f9a36ea3cea.jpg"
+        
+        imgElem.addEventListener("load", function(){
+            ctx.drawImage(imgElem, 50, 50, 50, 50);
+            ctx.drawImage(imgElem, 300, 400, 400, 250);
+        })
+    </script>
+</body>
+</html>

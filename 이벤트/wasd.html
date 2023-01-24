@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: tomato;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        const div = document.querySelector("div");
+        //a키를 눌렀을때 왼쪽으로 쭉 나아가야함
+        //조건문에 이벤트 값을 주면?
+        let game = {
+            i: 1,
+            z: 50,
+            move: 0
+        }
+
+
+        window.addEventListener("keydown", function(e){
+                if(e.key === "d") {
+                    right_sum()
+            }
+        })
+        function right_sum() {
+            game.move = game.z+game.i;
+            div.style.left= `${game.move}%`
+            console.log(div.style.left)
+            game.i++
+        }
+
+        window.addEventListener("keydown", function(e){
+                if(e.key === "a") {
+                    left_sum()
+            }
+        })
+        function left_sum() {
+            game.move = game.z+game.i;
+            div.style.left= `${game.move}%`
+            console.log(div.style.left)
+            game.i--
+        }
+        
+
+        
+    </script>
+</body>
+</html>

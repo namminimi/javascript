@@ -1,0 +1,15 @@
+자바스크립트 비동기
+
+setTimeout(f, time)
+1번만 함수 실행
+
+setInterval(f, time)
+시간이 지날 때 마다 함수 실행(무한반복)
+
+ex)
+
+let timer = setInterval(function(){},time)  (변수선언 해주고 clearInterver에 입력)
+1000 => 1초  ///while문 (true)와 비슷한 기능
+clearIntervar(timer) 정지시켜주는 기능
+setTimeout(function(){},time)
+

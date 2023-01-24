@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* //객체 리터럴
+        let 강아지 = {
+            name: "구름",
+            age: 3,
+            color: "흰색",
+            sound() {
+                console.log("멍멍");
+            }
+        }
+        /* let name = 강아지.name;
+        let sound = 강아지.sound;
+        console.log(강아지);
+        sound();
+        강아지.sound(); 
+        //하나씩 적기 귀찮은때
+        //구조분해할당
+        let {name, sound} = 강아지;
+        //새 객체를 만들어서 새로운 변수에 value값이 name, sound 안에 넣어줌
+
+        let state = {
+            abc: "AAA",
+            todoLists: [
+                {no:1, content: "aa"},
+                {no:2, content: "bb"},
+                {no:3, content: "cc"}
+            ]
+        }
+        const {abc, todoLists} = state;
+        let printName = state.printName;
+        console.log(todoLists)
+        console.log(abc)
+        printName;
+        let newArr = [true, function(){console.log("bb")}, "green"];
+        let [a, b] = newArr;
+        console.log(a) */
+
+        class Dog {
+            constructor(name, age, color) {
+                this.name = name;
+                this.age = age;
+                this.color = color;
+            }
+            sound() {
+                console.log("멍멍")
+            }
+        }
+        let dog1 = new Dog("구름", 20, "yellow");
+        //객체 구조분해할당
+        let {sound} = dog1;
+        console.log(dog1.sound)
+    </script>
+</body>
+</html>

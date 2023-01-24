@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* fetch("http://jsonplaceholder.typicode.com/posts/1")  1번
+        .then(res=>res.json()) 2번
+        .then(data=>console.log(data)); */ //사용방법1
+        //.catch(e=>console.log(e))
+        //방법2 await사용 같은방법임
+        //에이싱크와 어웨잇는 세트 /항상 프로미스 반한해줌
+        async function myFun(){
+            try{//문제가 생길것만 같은 코드를 try안에 넣어두면 문제있는걸 밑에 catch가 잡아줌
+                const res = await fetch("http://jsonplaceholder.typicode.com/poosts/1") //1번
+                const resjson = await res.json();  //2번
+                console.log(resjson);
+            }
+            catch(e){
+                console.log(e);
+            }
+            
+        }
+        myFun();
+
+        console.log("h"*3)
+    </script>
+</body>
+</html>

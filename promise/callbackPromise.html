@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const myFun1 = () => {
+            return new Promise((resolve, reject)=>{
+                setTimeout(function(){
+                resolve("1번 주문완료");
+            }, 1000)
+            }) 
+        }
+        const myFun2 = (message) => {
+            console.log(message);
+            return new Promise((resolve, reject)=>{
+                setTimeout(function(){
+                resolve("2번 주문완료");
+            }, 3000)
+            })
+            
+        }
+        const myFun3 = (message) => {
+            console.log(message);
+            return new Promise((resolve, reject)=>{
+                setTimeout(function(){
+                resolve("3번 주문완료");
+            }, 2000)
+            })
+            
+        }
+        /* const myFun2 = (number) => {
+            console.log(number);
+        } */
+
+        
+        /* myFun1(function(){ //함수의 매개변수안에 함수를 전달하는게 콜백함수라함
+            myFun2(function(){
+                myFun3(function(){
+                    console.log("끝");
+                })
+            })
+        }) */
+        //순차적으로 할때는 밑에처럼 해주고  시간은 다 더해서 6초
+        console.time("r");
+        /* myFun1()  //1번 함수 호출
+        .then(res=>myFun2(res))  //res 1번 주문완료 담기고 myFun2(res)담김 후 콘솔에 1번 주문 출력
+        .then(res=>myFun3(res))  //res 2번 주문완료 담기고 myFun3(res)담김 후 콘솔에 2번 주문 출력
+        .then(res=>{
+            console.log(res)
+            console.timeEnd("r");
+        }) //res 3번 주문완료 담기고  콘솔에 3번 주문 출력 */
+
+        /* Promise.all([myFun1(), myFun2(), myFun3()]).then(res=>{  //다같이 받고  한번에 호출해줄때는 이거 시간은 3개의 함수중 젤 긴거 3초
+            console.log(res);
+            console.timeEnd("r"); */
+            
+            Promise.race([myFun1(), myFun2(), myFun3()]).then(res=>{  //함수중 젤 빠른거 호출 1초
+            console.log(res);
+            console.timeEnd("r");
+        })
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //프로미스 프로듀서
+        let promise = new Promise((resolve, reject)=>{
+            console.log("수행중......");
+            setTimeout(()=>{
+                resolve("성공");
+                /* reject("error") */ //reject가 호출되면 catch가 받음
+            }, 2000)
+        });
+        //프로미스 컨슈머
+        promise.then(value =>{
+            console.log(value);
+        }).catch(error=>{
+            console.log(error)
+        })
+        .finally(()=>{
+            console.log("끝났어요");
+        });
+        console.log("하하하하하하ㅏㅎ") // 동기는 위에서 아래로 순서대로 수행하고 비동기는 순서대로 실행안됨  현재 줄 코드 먼저 실행되고 finally실행됨
+    </script>
+</body>
+</html>

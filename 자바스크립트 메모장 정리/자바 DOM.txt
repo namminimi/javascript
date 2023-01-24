@@ -1,0 +1,248 @@
+DOM이란?
+Document Object Model
+웹페이지에 대한 인터페이스
+여러 프로그램들이 페이지의 콘텐츠,
+구조 스타일을 읽고 조작할 수 있도록
+api를 제공
+DOM은 nodes와 property 와 method를 가지고 있는 object로 문서를 표현
+웹페이지를 자바스크립트 또는 다른 프로그래밍 언어로 연결해서 사용할 수 있도록 해준다.
+DOM은 웹페이지의 객체지향표현이며 자바 스크립트  언어를 이용해 DOM을 수정할 수 있다.
+
+
+
+html DOM 요소 내용으로 출력하기
+
+1. 단수 선택 (하나만 선택) 태그 지목
+document.getElementById("id명");--------- 자주 사용
+document.querySelector("css선택자 그대로") // "태그명" ---- 자주 사용함
+
+2. 복수 선택
+document.getElementByclassName("class명")
+document.getElementByTagName("tag명")
+document.querySelectorAll("css선택자 그대로")// "태그명" ---- 가끔씩 사용// li여러개 있으면 한번에 다 감아줄수 있음
+노드리스트(유사배열)
+
+작성 위치
+head/body 맨밑
+<script></script>
+자바스크립트파일 따로 만들었거나 외부에서 불러올때 연결방법
+<script src='myscript.js'></script>
+
+
+-----------------------------------------------------------------------------------------
+
+DOM에 수행하는 모든 연산은 document 객체에서 시작
+
+<html> = document.documentElement
+html 태그에 접근
+
+<body> = document.body
+body 태그에 접근 
+
+<head> = document.head
+head 태그에 접근
+
+window. 객체
+브라우저 안의 모든 요소 접근 가능(전역객체)
+window.innerHeight -> 화면 100%높이 값
+window.innerWidth -> 화면 100%너비 값
+
+!!!! 주의!!!!!
+html에 없는 태그에 접근 할시 null 출력됨 // null은 존재하지 않음이라는 의미
+--------------------------------------------------------------------------------------------------------
+1. html의 내용 변경
+
+.innerHTML = ""
+html로 div안에 홍길동이라는 이름을 화면에 출력되있음
+홍길동을 이순신으로 바꿔서 출력하고 싶을때는 
+document.getElementById("id명").innerHTML = "이순신"; 
+document.querySelector("div(태그명)").innerHTML = "이순신";
+
+el.innerHTML => 태그를 포함하여 수정
+el.innerTEXT => 글자만 수정
+
+2. html 속성변경
+document.getElementById("id명").src = 'pic.gif';
+document.querySelector("div(태그명)").src = 'pic.gif';
+
+
+3.html의 스타일
+document.getElementById("id명").style.background = "red"
+document.querySelector("div(태그명)").style.background = "red"
+
+
+-------------------------------------------------------------------------------------------
+
+
+태그에 적용시킨 css(내부 스타일 속성값) 경고창에 띄우기
+
+예시
+css
+#hz {padding: 30px 30px;}
+
+<div id ="hz">dd</div>
+
+<script>
+var hz = document.getElementById("hz");
+// 이름이 hz태그를 지목해서 hz에 담는다
+    !!!!var x = window.getComputedStyle(hz).getPropertyValue("padding");!!!!!
+//윈도우에서 hz 내부 스타일을 받아오고.       내부 스타일 속성값을 가져온다(padding 값) x에 담는다
+  alert(x);
+경고창에 padding: 30px 30px 나옴
+
+
+-------------------------------------------------------------------------------------------
+.value 값 가져오기
+<input type="radio" name="" value="javascript">
+
+!!!!!!!document.querySelector("태그명/id값").value// 변수명에 저장가능  
+let inpput= document.querySelector("태그명/id값") ---> inpput.value
+
+입력해주면 value값인 javascript를 입력해줌
+
+-----------------------------------------------------------------------------------
+이벤트 :::::: 웹페이지를 이용하면서 행하는 액션
+
+표준이벤트 연결자 !!!! -- 이벤트사용할 때 항상 써줘야함
+object(변수명).addEventListerner("이벤트", 함수(function())
+
+1. click/onclick ::: 용도: 검색 결화 출력/ 입력데이터 서버로 보내기,저장/ 해당 메뉴 이동
+------요소 위에서 마우스를 클릭했을 때-------
+사용되는 대표 DOM요소 <button> 
+<button onclick = "함수명()"></button>
+
+2. mouseenter : 요소위에 마우스가 있을 때
+
+3. mouseleave: 요소위에서 마우스가 벗어났을 때
+
+4.mousemove: 요소위에서 마우스를 움직일 때// 마우스 이동하면 따라서 이동
+
+5. scroll: 요소를 클릭하면 스크롤처럼 넘겨주는식으로 반응함
+
+lis[i].addEventListener("click", function(){
+                window.scrollTo({top: i*wh, behavior: "smooth"});
+                리스트 클릭했을때 위 아래 이동 가능/ 부드럽게
+
+스크롤 이벤트
+1) 스크롤값 반환 document.documentElement.scrollTop;
+2) document.addEvnetListener("scroll", function(){
+	스크롤 될때 동작하는 코드
+}
+3)스크롤 위치 이동
+window.scrollTo({top: 200, behavior: "smooth"})
+
+
+마우스 무브 이벤트
+obj.addEventListener("mousemove",function(e) {
+	e.pageX
+	e.pageY
+}
+
+6. input => input요소에 값을 입력하면 발생되는 이벤트
+
+input.addEventListener("input", function() {
+	console.log(input.value);
+})
+
+7. change이벤트
+폼관련 속성
+checked true값이면 체크 false면 체크해지
+
+8. focus, submit 이벤트
+포커스 커서 옴겨가는 곳
+------------------------------------------------------------------------------------------------------------------
+classList
+자바스크립트를 사용하여 클래스를 변경하기
+
+1) 클래스 추가     ------------자주사용됨
+object.classList.add("클래스명");
+ex) document.querySelector("#box").classList.add("on");
+
+2) 클래스 제거     ------------자주사용됨
+object.classList.remove("클래스명");
+ex> document.querySelector("#box").classList.remove("on");
+
+3) 클래스 추가/제거
+object.classList.toggle("클래스명");        //반복적이거나 게임같은거? 사용하지말것 여러번 쓰다보면 헷갈림
+클래스명이 존재할 경우 제거 그렇지 않은 경우 추가
+
+4) 클래스명이 있는지 확인
+object.classList.contains("클래스명");
+클래스명이 있으면 true 없으면 false반환
+
+----------------------------------------------------------------------------------------------------------------------
+
+//////////DOM요소 생성////////////
+
+document.createElement("div") 새요소 만들기   ------------자주사용됨
+document.createTextNode("text")텍스트 노드 만들기
+
+---------------------------------------------------------------------------------------------------------------------
+
+노드 선택하기
+parent.appendChild(element) 부모요소의 자식요소로 추가   ------------자주사용됨
+이미 자식요소가 있을 경우 마지막 자식요소로 추가
+parent.insertBefore(el, position) 부모요소의 자식요소로 추가
+el - 삽입할 요소
+position - 삽입할 위치
+parent.children[0] 몇번째에 추가하겠다   //부모의 자식요소노드
+firstElementChild  첫번째 자식 추가       // 첫번째 자식 요소노드
+lastElementChild   마지막 자식에 추가      // 마지막 자식 요소 노드
+el.nextElementSibling           element 다음요소노드
+el.PreviousElementSibling      element 이전요소노드
+
+--------------------------------------------------------------------------------------------------------------------
+만들어진 요소를 DOM추가하기
+node.append(노드나 문자열) - node끝에 삽입
+node.prepend(노드나 문자열) - node 맨앞에 삽입
+node.before(노드나 문자열) - node이전에 삽입
+node.after(노드나 문자열) - node 다음에 삽입
+parent.insertAdjacentHTML(position, el)/ Text/ Element(where, html)
+afterbegin     - 첫번째 자식요소 앞에 삽입
+afterend       - elem 바로 다음에 삽입
+beforebegin  - elem 바로앞에 삽입
+beforeend    - 마지막 자식요소 다음에 삽입
+
+
+위 명령어 위치
+-beforebegin
+<ul>
+-afterbegin
+	<li>list1</li>
+	<li>list2</li>
+	<li>list3</li>
+-beforeend
+</ul>
+afterend
+ol.insertAdjacentHTML(afterbegin, "<p>ddd</p>")
+
+-------------------------------------------------------------------------------------------------------------------------
+
+5)DOM 삭제하기 
+node.remove() node삭제
+node.removeChild(자식노드) 자식노드 삭제
+
+-------------------------------------------------------------------------------------------------------------------------
+
+6)DOM 복제하기
+elem.cloneNode(true/false)
+<ul>
+	<li></li>
+</ul>
+
+ul li 통째로 복사하고싶은면 true
+ul 안에 li빼고 복제하고싶으면 false
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
