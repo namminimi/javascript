@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.min.js"></script> <!-- 설치안하고 사용한다 -->
+    <style>
+        .component {
+            border: 5px solid #000;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="red"></div>
+    <div id="blue"></div>
+    <div id="yellow"></div>
+    <script>
+        //1.리듀서 함수 만들기{type:'CHANGE_COLOR', color: 'red'} 액션으로 들어감
+        function reducer(state, action){
+            //state초기값을 위해 처음에 호출
+            if(state == undefined){
+                return {color: 'white'}
+            }
+            let newState;
+            if(action.type === "CHANGE_COLOR") {
+                //newState = {...state, color: action.color};
+                newState =  Object.assign({}, state, {color: action.color}) 
+                //assign메서드 객체 복사(빈객체 복사, )
+                console.log(newState)
+            }
+            return newState; //상태를 리턴해줌(업데이트)
+        }
+        //store 만들기
+        const store = Redux.createStore(reducer);
+        function red(){
+            //상태값 반환 getState()  {color:"white"}
+            let state = store.getState();
+            document.querySelector("#red").innerHTML=`
+            <div class="component" style="background-color: ${state.color}">
+                <h1>red</h1>
+                <button onclick="store.dispatch({type:'CHANGE_COLOR', color: 'red'})">
+                버튼</button>
+            </div> `
+        }
+        function blue(){
+            let state = store.getState();
+            document.querySelector("#blue").innerHTML=`
+            <div class="component" style="background-color: ${state.color}">
+                <h1>blue</h1>
+                <button onclick="store.dispatch({type:'CHANGE_COLOR', color: 'blue'})">
+                버튼</button>
+            </div>
+            `
+        }
+        function yellow(){
+            let state = store.getState();
+            document.querySelector("#yellow").innerHTML=`
+            <div class="component" style="background-color: ${state.color}">
+                <h1>yellow</h1>
+                <button onclick="store.dispatch({type:'CHANGE_COLOR', color: 'yellow'})">
+                버튼</button>
+            </div>
+            `
+        }
+        //디스패치 안에 있는건 액션
+        //구동하기 상태가 업데이트 되면 red함수 호출
+        store.subscribe(red);
+        red();
+        store.subscribe(blue);
+        blue();
+        store.subscribe(yellow);
+        yellow();
+    </script>
+</body>
+</html>
